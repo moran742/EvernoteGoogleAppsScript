@@ -1,0 +1,28 @@
+function sendMail() {   
+  var cal = CalendarApp.getDefaultCalendar();
+  var todaysDate = new Date();
+  var events = cal.getEventsForDay(todaysDate);
+  var startTime = "";
+  var stopTime = "";
+  var eventList = "";
+  var guestString = "";
+  
+  for (var i = 0; i < events.length; i++) {
+    if (events[i].isAllDayEvent()) {
+      continue;
+    }
+    startTime = Utilities.formatDate(events[i].getStartTime(), "EST", "h:mma");
+    stopTime = Utilities.formatDate(events[i].getEndTime(), "EST", "h:mma");
+    var guests = events[i].getGuestList();
+        for (var m = 0; m < guests.length; m++) {
+         guestString = guestString + (guests[m].getEmail() + "\n");
+        }
+    eventList = eventList + (startTime + "-" + stopTime + "  " + events[i].getTitle() + "\n"+ "   " + guestString + "\n");
+    guestString = "";
+  }
+
+    var emailAddress = "PUT YOUR EVERNOTE EMAIL ADDRESS HERE"
+    var subject = "Calendar Agenda for " + Utilities.formatDate(todaysDate, "EST", "MM/dd/yyyy") + " @CalendarAgendas";
+    var message = eventList;
+    MailApp.sendEmail(emailAddress, subject, message);
+}
