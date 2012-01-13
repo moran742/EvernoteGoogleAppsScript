@@ -7,6 +7,7 @@ function sendMail() {
   var eventList = "";
   var guestString = "";
   
+  if (events.length > 0) {
   for (var i = 0; i < events.length; i++) {
     if (events[i].isAllDayEvent()) {
       continue;
@@ -21,8 +22,9 @@ function sendMail() {
     guestString = "";
   }
 
-    var emailAddress = "PUT YOUR EVERNOTE EMAIL ADDRESS HERE"
+    var emailAddress = "moran742.db9aa@m.evernote.com"
     var subject = "Calendar Agenda for " + Utilities.formatDate(todaysDate, "EST", "MM/dd/yyyy") + " @CalendarAgendas";
     var message = eventList;
     MailApp.sendEmail(emailAddress, subject, message);
+}
 }
