@@ -22,7 +22,7 @@ function sendMail() {
     guestString = "";
   }
 
-    var emailAddress = "moran742.db9aa@m.evernote.com"
+    var emailAddress = "YOUR EVERNOTE EMAIL HERE"
     var subject = "Calendar Agenda for " + Utilities.formatDate(todaysDate, "EST", "MM/dd/yyyy") + " @CalendarAgendas";
     var message = eventList;
     MailApp.sendEmail(emailAddress, subject, message);
